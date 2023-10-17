@@ -1,19 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import PokemonsView from '../views/PokemonsView.vue'
+import PokemonDetailView from '../views/PokemonDetailView.vue'
+import StatsView from '../views/StatsView.vue'
+import AbilitiesView from '../views/AbilitiesView.vue'
+import MovesView from '../views/MovesView.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path:'/',
+    name: 'pokemos-list',
+    component: PokemonsView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path:'/pokemon-detail/:name',
+    name:'pokemon-detail',
+    component: PokemonDetailView,
+    children: [
+      {
+        path:'stats',
+        name:'stats',
+        component:StatsView
+      },
+      {
+        path:'abilities',
+        name:'abilities',
+        component:AbilitiesView
+      },
+      {
+        path:'moves',
+        name:'moves',
+        component:MovesView
+      }
+    ]
   }
 ]
 
